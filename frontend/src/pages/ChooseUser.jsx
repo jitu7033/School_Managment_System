@@ -159,3 +159,6 @@ const StyledPaper = styled(Paper)`
     }
 `;
 
+const StyledTypography = styed.h2`
+    margin-bottom : 10px;
+`;
