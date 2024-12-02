@@ -75,3 +75,14 @@ const TeacherHomePage = ()=> {
     );
 };
 
+
+const StyledPaper = styled(Paper)`
+    padding : 16px;
+    display : flex;
+    flex-idrection : column;
+    height : 200px;
+    justify-content : space-between;
+    align-items : center;
+    text-align : center;
+`;
+
