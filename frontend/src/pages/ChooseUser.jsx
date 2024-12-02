@@ -29,7 +29,7 @@ const ChooseUder = ({ visitor }) =>{
     const navigateHandler = (user) => {
         if(user === "Admin"){
             if(visitor === "guest"){
-                const email = "manu@8274";
+                const email = "guest@12";
                 const feilds = { email, password};
                 setloader(true);
                 dispatch(loginUser(fields , user));
@@ -38,5 +38,18 @@ const ChooseUder = ({ visitor }) =>{
                 navigate('/Adminlogin');
             }
         }
+        else if(user === "Student"){
+            if(visitor ==="guest"){
+                const rollnum = "1";
+                const studentName = "Guest";
+                const fields = { rollnum , studentName , password };
+                setloader(true);
+                dispatch(loginUser(fields, user));
+            }
+            else {
+                navigate('/Studentlogin');
+            }
+        }
+        
     }
 }
