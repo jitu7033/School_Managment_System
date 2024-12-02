@@ -1,18 +1,60 @@
 import React from 'react'
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Button, Grid, Box, Typography, Paper, Checkbox, FormControlLabel, TextField, CssBaseline, IconButton, InputAdornment, CircularProgress, Backdrop } from '@mui/material';
 import { LightPurpleButton } from '../components/buttonStyles';
 import styled from 'styled-components';
+// import { loginUser } from '../redux/userRelated/userHandle';
 import bgpic from "../assets/designlogin.jpg"
-import { Link, useNavigate } from 'react-router-dom';
 import Popup from '../components/Popup';
-
-
 
 
 const defaultTheme = createTheme();
 
 const LoginPage = ({ role }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const {status,currentUser,response,error,currentRole} = useSelector(state=>state.user);
+
+  const [loader, setLoader] = useState(false)
+
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [rollNumberError, setRollNumberError] = useState(false);
+  const [studentNameError, setStudentNameError] = useState(false);
+
+
+
+  const handleSubmit = (event) =>{
+    event.preventDefault();
+
+    if(role === "Student"){
+      const rollNum = event.target.rollNumber.value;
+      const studentName = event.target.studentName.value;
+      const password = event.target.pasword.value;
+
+      if(!rollNum || !studentName || !password){
+        if(!rollNum)setRollNumberError(true);
+        if(!studentName)setStudentNameError(true);
+        if (!password) setPasswordError(true);
+        return;
+      }
+      const field = {rollNum,studentName,password}
+      setLoader(true);
+      dispatch(loginUser(field,role))
+    }
+  } 
+
+
+
+
+
+
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
