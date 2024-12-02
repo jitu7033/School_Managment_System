@@ -15,7 +15,7 @@ import { useDispatch , useSelector } from 'react-redux';
 import { loginUser } from '../redux/userRelated/userHandle';
 import Popup from '../components/Popup';
 
-const ChooseUder = ({ visitor }) =>{
+const ChooseUser = ({ visitor }) =>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const password = "password123";
@@ -99,8 +99,41 @@ const ChooseUder = ({ visitor }) =>{
                             </StyledPaper>
                         </div>
                     </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                        <div onClick={()=> navigateHandler("Teacher")}>
+                            <StyledPaper elevation={3}>
+                                <Box mb={2}>
+                                    <AccountCircle fontsize="large" />
+                                </Box>
+                                <StyledTypography>
+                                    Teacher
+                                </StyledTypography>
+                                Login as a teacher to create courses, assignments, and track student progress.
+                            </StyledPaper>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                        <div onClick={() => navigateHandler("Student")}>
+                            <StyledPaper elevation={3}>
+                                <Box mb={2}>
+                                    <AccountCircle fontsize="large" />
+                                </Box>
+                                <StyledTypography>
+                                    Student
+                                </StyledTypography>
+                                Login as a student to explore course materials and assignments.
+                            </StyledPaper>
+                        </div>
+                    </Grid>
                 </Grid>
             </Container>
+            <Backdrop sx={{ color: '#fff' ,zIndex: (theme) => theme.zIndex.drawer + 1}} open={loader}>
+                <CircularProgress color='inherit' />
+                Please Wait
+            </Backdrop>
+            <Popup message={message} setMessage={setShowPopup} showPopup={showPopup}/>
         </StyledContainer>
-    )
-}
+    );
+};
+
+export default ChooseUser;
