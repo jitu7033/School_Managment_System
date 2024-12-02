@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { response } from 'express';
 
-const intialState = {
+const initialState = {
     status: 'idle',
     userDetails: [],
     tempDetails: [],
@@ -10,12 +9,12 @@ const intialState = {
     currentRole: (JSON.parse(localStorage.getItem('user')) || {}).role || null,
     error: null,
     response: null,
-    darkMode: true,
+    darkMode: true
 };
 
 const userSlice = createSlice({
     name: 'user',
-    intialState,
+    initialState,
     reducers: {
         authRequest: (state) => {
             state.status = 'loading';
@@ -24,7 +23,7 @@ const userSlice = createSlice({
             state.status = 'idle';
             state.response = null;
         },
-        stffAdded: (state, action) => {
+        stuffAdded: (state, action) => {
             state.status = 'added';
             state.response = null;
             state.error = null;
@@ -39,41 +38,47 @@ const userSlice = createSlice({
             state.error = null;
         },
         authFailed: (state, action) => {
+            state.status = 'failed';
+            state.response = action.payload;
+        },
+        authError: (state, action) => {
             state.status = 'error';
             state.error = action.payload;
         },
-        authLogout: (state, action) => {
+        authLogout: (state) => {
             localStorage.removeItem('user');
             state.currentUser = null;
-            state.status = 'idle',
-                state.error = null;
-            state.currentRole = null;
+            state.status = 'idle';
+            state.error = null;
+            state.currentRole = null
         },
-        doneSucess: (state, action) => {
+
+        doneSuccess: (state, action) => {
             state.userDetails = action.payload;
-            state.loading = false,
+            state.loading = false;
             state.error = null;
             state.response = null;
         },
-        getDeleteSuccess : (state)=>{
-            state.loading = false,
+        getDeleteSuccess: (state) => {
+            state.loading = false;
             state.error = null;
             state.response = null;
         },
-        getRequest : (state) =>{
-            state.loading =  true;
+
+        getRequest: (state) => {
+            state.loading = true;
         },
-        getFailed : (state , action) =>{
+        getFailed: (state, action) => {
             state.response = action.payload;
-            state.loading = false,
+            state.loading = false;
             state.error = null;
         },
-        getError : (state , action) =>{
+        getError: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         },
-        toggleDarkMode : (state) =>{
-            state.darkMode = !state.daekMode;
+        toggleDarkMode: (state) => {
+            state.darkMode = !state.darkMode;
         }
     },
 });
