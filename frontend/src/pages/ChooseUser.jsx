@@ -50,6 +50,17 @@ const ChooseUder = ({ visitor }) =>{
                 navigate('/Studentlogin');
             }
         }
-        
+        else if(user === "Teaccher"){
+            if(visitor === "guest"){
+                const email = "guest@12";
+                const fields = { email , password};
+                setloader(true);
+                dispatch(loginUser(fields , user));
+            }
+            else{
+                navigate("/Teaccherlogin");
+            }
+        }
     }
+    
 }
