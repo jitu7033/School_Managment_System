@@ -86,3 +86,13 @@ const StyledPaper = styled(Paper)`
     text-align : center;
 `;
 
+const Title = style.p`
+    font-size : calc(1.3rem + 0.6vw);
+`;
+
+const Data = styled(CountUp)`
+    font-size : calc(1.3rem + 0.6vw);
+    color : green;
+`;
+
+export default TeacherHomePage;
