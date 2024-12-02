@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 const TeacherHomePage = ()=> {
     const dispatch =  useDispatch();
     const { currentUser } = useSelector((state) => state.user);
-    const { subjectDetail, sclassStudents } = useSelector((state) => state.sclass);\
+    const { subjectDetail, sclassStudents } = useSelector((state) => state.sclass);
 
     const classID = currentUser.teachSclass?._id;
     const subjectID = currentUser.teachSubject?._id;
