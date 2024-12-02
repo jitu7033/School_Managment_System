@@ -62,5 +62,45 @@ const ChooseUder = ({ visitor }) =>{
             }
         }
     }
-    
+
+    useEffect(()=>{
+        if(status === 'success' || currentUser!== null){
+            if(currentRole === 'Admin'){
+                navigate('/Admin/dashboard');
+            }
+            else if(currentRole === 'Student'){
+                navigate('/Student/dashboard');
+            }
+            else if(currentRole === 'Teaccher'){
+                navigate('/Teacher/dashboard');
+            }
+        }
+        else if(status === 'error'){
+            setloader(false);
+            setMessage("Network Error");
+            setShowPopup(true);
+        }
+    } , [ status , currentRole , navigate , currentUser]);
+
+    return (
+        <StyledContainer>
+            <Container>
+                <Grid container spacing={2} justifyContent='center'>
+                    <Grid item xs={12} sm={6} md={4}>
+                        <div onClick={()=> navigateHandler("Admin")}>
+                            <StyledPaper elevation={3}>
+                                <Box mb={2}>
+                                    <AccountCircle fontsize="large" />
+                                </Box>
+                                <StyledTypography>
+                                    Admin
+                                </StyledTypography>
+                                Login As an Administerator to access the dashboard to manage app data
+                            </StyledPaper>
+                        </div>
+                    </Grid>
+                </Grid>
+            </Container>
+        </StyledContainer>
+    )
 }
