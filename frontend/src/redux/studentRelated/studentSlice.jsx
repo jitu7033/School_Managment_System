@@ -1,6 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { getFailed, getRequest } from '../userRelated/userSlice'
-import { act } from 'react';
 
 const initialState={
     studentsList : [],
@@ -32,7 +30,7 @@ const studentSlice = createSlice({
         getFailed : (state,action) =>{
             state.response = action.payload;
             state.loading = false;
-            state.error = nulll;
+            state.error = null;
         },
         getError : (state,action) => {
             state.loading = false;

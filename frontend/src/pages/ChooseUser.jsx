@@ -63,7 +63,7 @@ const ChooseUser = ({ visitor }) => {
       }
     }
   }
-
+  
   useEffect(() => {
     if (status === 'success' || currentUser !== null) {
       if (currentRole === 'Admin') {
@@ -161,6 +161,7 @@ const StyledPaper = styled(Paper)`
     color:white;
   }
 `;
+
 const StyledTypography = styled.h2`
   margin-bottom: 10px;
 `;
