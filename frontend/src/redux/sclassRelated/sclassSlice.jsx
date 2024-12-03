@@ -17,7 +17,7 @@ const initialState = {
 const sclassSlice = createSlice({
     name : 'sclass',
     initialState,
-    reducers : {
+    reducer : {
         getRequest : (state) =>{
             state.loading = true;
         },
