@@ -24,3 +24,40 @@ export const  getALlStudent = (id) => async (dispatch) => {
         dispatch(getError(error));
     }
 }
+
+// update student field 
+export const updateField = (id,field,address) => async (dispatch) =>{
+    dispatch(getRequest);
+
+    try{
+        const result = await axios.put(`${process.env.REACT_APP_BASE_URL}/${address}/${id}`,field,{
+            headers:{'Content-Type' : 'application/json'},
+        });
+        if(result.data.message){
+            dispatch(getFailed(result.data.message));
+        }
+        else{
+            dispatch(stuffDone());
+        }
+    }
+    catch(error){
+        dispatch(getError(error));
+    }
+}
+
+
+export const removeStuff = (id,address) => async (dispatch) =>{
+    dispatch(getRequest());
+
+    try{
+        const result = await axios.put(`${process.env.REACT_APP_BASE_URL}/${address}/${id}`);
+        if(result.data.message){
+            dispatch(getFailed(result.data.message));
+        }
+        else{
+            dispatch(stuffDone());
+        }
+    }catch(error){
+        dispatch(getError(error));
+    }
+}
