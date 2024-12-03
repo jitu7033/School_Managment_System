@@ -1,43 +1,42 @@
-import { createSlice } from "@reactjs/toolkit";
-import { response } from "express";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    complainList : [],
-    loading : false,
-    error : null,
-    response : null,
+    complainsList: [],
+    loading: false,
+    error: null,
+    response: null,
 };
 
 const complainSlice = createSlice({
-    name : 'complain' ,
+    name: 'complain',
     initialState,
-    reducers : {
-        getRequest : (state) =>{
+    reducers: {
+        getRequest: (state) => {
             state.loading = true;
         },
-        getSuccess : (state , action) =>{
+        getSuccess: (state, action) => {
             state.complainsList = action.payload;
             state.loading = false;
             state.error = null;
-            state.response = null; 
+            state.response = null;
         },
-        getFailed : (state , action)=>{
+        getFailed: (state, action) => {
             state.response = action.payload;
             state.loading = false;
             state.error = null;
         },
-        getError : (state , action)=>{
+        getError: (state, action) => {
             state.loading = false;
             state.error = action.payload;
-        },
+        }
     },
 });
 
 export const {
     getRequest,
-    getFailed,
-    getError,
     getSuccess,
+    getFailed,
+    getError
 } = complainSlice.actions;
 
-export const complainReducer = complainSlice.reducers;
+export const complainReducer = complainSlice.reducer;

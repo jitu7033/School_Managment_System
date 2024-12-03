@@ -1,36 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { response } from "express";
 
 const initialState = {
-    sclassesList : [],
-    sclassStudents : [],
-    sclassDetails : [],
-    subjectsList : [],
-    subjectsDetails : [],
-    loading : false,
-    subloading : false,
-    error : false,
-    response : false,
-    getresponse : false,
+    sclassesList: [],
+    sclassStudents: [],
+    sclassDetails: [],
+    subjectsList: [],
+    subjectDetails: [],
+    loading: false,
+    subloading: false,
+    error: null,
+    response: null,
+    getresponse: null,
 };
 
 const sclassSlice = createSlice({
-    name : 'sclass',
+    name: 'sclass',
     initialState,
-    reducer : {
-        getRequest : (state) =>{
+    reducers: {
+        getRequest: (state) => {
             state.loading = true;
         },
-        getSubDetailsRequest : (state)=>{
+        getSubDetailsRequest: (state) => {
             state.subloading = true;
         },
-        getSuccess : (state,action)=>{
-            state.sclassList = action.payload;
+        getSuccess: (state, action) => {
+            state.sclassesList = action.payload;
             state.loading = false;
             state.error = null;
             state.getresponse = null;
         },
-        getStudentsSuccess : (state,action)=>{
+        getStudentsSuccess: (state, action) => {
             state.sclassStudents = action.payload;
             state.loading = false;
             state.error = null;
@@ -48,41 +47,46 @@ const sclassSlice = createSlice({
             state.loading = false;
             state.error = null;
         },
-        getFailedTwo : (state,action)=>{
+        getFailedTwo: (state, action) => {
             state.sclassesList = [];
             state.sclassStudents = [];
-            state.response = action.payload;
+            state.getresponse = action.payload;
             state.loading = false;
             state.error = null;
         },
-        getError : (state , action) =>{
+        getError: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         },
-        detailsSucess : (state,action)=>{
+        detailsSuccess: (state, action) => {
             state.sclassDetails = action.payload;
             state.loading = false;
             state.error = null;
         },
-        getSubDetailsSuccess : (state,action) =>{
-            state.subjectsDetails = action.payload;
+        getSubDetailsSuccess: (state, action) => {
+            state.subjectDetails = action.payload;
             state.subloading = false;
             state.error = null;
         },
+        resetSubjects: (state) => {
+            state.subjectsList = [];
+            state.sclassesList = [];
+        },
     },
-}); 
+});
 
 export const {
     getRequest,
-    getFailed,
-    getFailedTwo,
     getSuccess,
+    getFailed,
     getError,
     getStudentsSuccess,
-    getSubDetailsRequest,
     getSubjectsSuccess,
-    detailsSucess,
-    getSubDetailsSuccess
+    detailsSuccess,
+    getFailedTwo,
+    resetSubjects,
+    getSubDetailsSuccess,
+    getSubDetailsRequest
 } = sclassSlice.actions;
 
 export const sclassReducer = sclassSlice.reducer;
