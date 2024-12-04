@@ -122,4 +122,36 @@ const TeacherClassDetails = () => {
             </>
         );
     };
+
+    return (
+        <>
+            {loadin ? (
+                <div>Loading...</div>
+            ) : (
+                <>
+                    <Typography variant="h4" align="center" hutterbutton>
+                        CLass Details
+                    </Typography>
+                    {getresponse ? (
+                        <>
+                            <Box sx = {{display:'flex' , justifyContent:'flex-end' , marginTop:'16px'}}>
+                                No Students Found
+                            </Box>
+                        </>
+                    ) : (
+                        <Paper sx = {{ width: '100%', overflow:'hidden'}}>
+                            <Typography variant="h5" gutterBottom>
+                                Students List:
+                            </Typography>
+                            {Array.isArray(sclassStudents) && sclassStudents.length >0 && 
+                                <TableTemplate buttomHaver={StudentsButtonHaver} columns={studentsColumns} rows={studentRows}/>
+                            }
+                        </Paper>
+                    )}
+                </>
+            )};
+        </>
+    );
 };
+
+export default TeacherClassDetails;
