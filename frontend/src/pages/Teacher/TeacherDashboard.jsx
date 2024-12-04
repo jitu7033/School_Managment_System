@@ -11,9 +11,9 @@ import { AppBar, Drawer } from '../../components/styles';
 import StudentAttendance from '../admin/studentRelated/StudentAttendance';
 
 import TeacherClassDetails from './TeacherClassDetails';
-import TeacherComplain from './TeacherComplain';
-import TeacherHomePage from './TeacherHomePage';
-import TeacherProfile from './TeacherProfile';
+import TeacherComplain from '../Teacher/TeacherComplains';
+import TeacherHomePage from '../Teacher/TeacherHomePage';
+import TeacherProfile from '../Teacher/TeacherProfile';
 import TeacherViewStudent from './TeacherViewStudent';
 import StudentExamMarks from '../admin/studentRelated/StudentExamMarks';
 

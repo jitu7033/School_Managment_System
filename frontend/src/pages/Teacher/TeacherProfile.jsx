@@ -4,7 +4,7 @@ import { Card, CardContent, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 const TeacherProfile =()=>{
-    const { currentUser , response , error } = useSelector(stste => state.user);
+    const { currentUser , response , error } = useSelector(state => state.user);
 
     if(error){
         console.log(error);
@@ -28,6 +28,7 @@ const TeacherProfile =()=>{
         </>
     );
 };
+export default TeacherProfile;
 
 const ProfileCard = styled(Card)`
     margin : 20px;

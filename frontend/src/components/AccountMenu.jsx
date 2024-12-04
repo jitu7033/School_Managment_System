@@ -9,7 +9,7 @@ const AccountMenu=()=>{
     const open = Boolean(anchorEl);
     const { currentRole , currentUser}=  useSelector(state =>state.user);
     const handleClick = (event) =>{
-        setAnchorEl(null);
+        setAnchorEl(event.currentTarget);
     };
     const handleClose = () =>{
         setAnchorEl(null);

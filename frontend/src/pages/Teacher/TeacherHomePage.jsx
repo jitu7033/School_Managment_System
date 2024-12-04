@@ -6,7 +6,7 @@ import Students from "../../assets/img1.png";
 import Lessons from "../../assets/subjects.svg";
 import Test from "../../assets/assignment.svg";
 import Time from "../../assets/time.svg";
-import { getClassStudent , getSubjectDetails} from "../../redux/sclassRelated/sclassHandle";
+import { getClassStudents , getSubjectDetails} from "../../redux/sclassRelated/sclassHandle";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -20,7 +20,7 @@ const TeacherHomePage = ()=> {
 
     useEffect(()=>{
         dispatch(getSubjectDetails(subjectID, "Subject"));
-        dispatch(getClassDetails(classID));
+        dispatch(getClassStudents(classID));
     } , [dispatch , subjectID , classID]);
 
     const numberOfStudents = sclassStudents && sclassStudents.length;
@@ -30,40 +30,40 @@ const TeacherHomePage = ()=> {
         <>
             <Container maxWidth="lg" sx={{ mt:4 , mb: 4 }}>
                 <Grid item xs={12} md={3} lg={3}>
-                    <StylePaper>
+                    <StyledPaper>
                         <img src={Students} alt="Students" />
                         <Title>
                             Class Students
                         </Title>
                         <Data start={0} end={numberOfStudents} duration={2.5} />
-                    </StylePaper>
+                    </StyledPaper>
                 </Grid>
                 <Grid item xs={12} md={3} lg={3}>
-                    <StylePaper>
+                    <StyledPaper>
                         <img src={Lessons} alt="Lessons" />
                         <Title>
                             Total Lessons
                         </Title>
                         <Data start={0} end={numberOfSessions} duration={5} />
-                    </StylePaper>
+                    </StyledPaper>
                 </Grid>
                 <Grid item xs={12} md={3} lg={3}>
-                    <StylePaper>
-                        <img src={Tests} alt="Tests" />
+                    <StyledPaper>
+                        <img src={Test} alt="Tests" />
                         <Title>
                             Tests Taken
                         </Title>
                         <Data start={0} end={24} duration={4} />
-                    </StylePaper>
+                    </StyledPaper>
                 </Grid>
                 <Grid item xs={12} md={3} lg={3}>
-                    <StylePaper>
+                    <StyledPaper>
                         <img src={Time} alt="Time" />
                         <Title>
                             Total Hours
                         </Title>
                         <Data start={0} end={30} duration={4} suffix="hrs"/>
-                    </StylePaper>
+                    </StyledPaper>
                 </Grid>
                 <Grid item xs={12}>
                     <Paper sx={{ p:2 , display:'flex' , flexDirection : 'column'}}>
@@ -86,7 +86,7 @@ const StyledPaper = styled(Paper)`
     text-align : center;
 `;
 
-const Title = style.p`
+const Title = styled.p`
     font-size : calc(1.3rem + 0.6vw);
 `;
 

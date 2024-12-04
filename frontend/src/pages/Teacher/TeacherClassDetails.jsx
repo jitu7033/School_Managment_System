@@ -43,7 +43,7 @@ const TeacherClassDetails = () => {
 
         const [open, setOpen] = React.useState(false);
         const anchorRef = React.useRef(null);
-        const [selectedIndex, setselectedIndex] = React.useState(0); \
+        const [selectedIndex, setSelectedIndex] = React.useState(0);
 
         const handleClick = () => {
             console.info(`You Clicked ${options[selectedIndex]}`);
@@ -96,7 +96,7 @@ const TeacherClassDetails = () => {
                                 {...TransitionProps}
                                 style={{
                                     transformOrigin:
-                                        placement === 'bottom' ? 'center top' : 'center bottom';
+                                        placement === 'bottom' ? 'center top' : 'center bottom',
                                 }}
                             >
                                 <Paper>
@@ -144,7 +144,7 @@ const TeacherClassDetails = () => {
                                 Students List:
                             </Typography>
                             {Array.isArray(sclassStudents) && sclassStudents.length >0 && 
-                                <TableTemplate buttomHaver={StudentsButtonHaver} columns={studentsColumns} rows={studentRows}/>
+                                        <TableTemplate buttomHaver={StudentsButtonHaver} columns={studentColumns} rows={studentRows}/>
                             }
                         </Paper>
                     )}
