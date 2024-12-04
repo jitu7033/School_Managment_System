@@ -8,20 +8,20 @@ import { BlackButton, BlueButton } from "../../components/buttonStyles";
 import TableTemplate from "../../components/TableTemplate";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 
-const TeacherClassDetails = () =>{
-    const navigate =  useNavigate();
+const TeacherClassDetails = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { sclassStudents , loadin , error , getresponse } = useSelector((state) => state.sclass);
+    const { sclassStudents, loadin, error, getresponse } = useSelector((state) => state.sclass);
 
     const { currentUser } = useSelector(state => state.user);
     const classID = currentUser.teachSclass?._id;
     const subjectID = currentUser.teachSubject?._id;
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getClassStudents(classID));
-    } , [dispatch , classID]);
+    }, [dispatch, classID]);
 
-    if(error){
+    if (error) {
         console.log(error);
     }
 
@@ -32,30 +32,30 @@ const TeacherClassDetails = () =>{
 
     const studentRows = sclassStudents.map((student) => {
         return {
-            name : student.name,
-            rollNum : student.rollNum,
-            id : student._id,
+            name: student.name,
+            rollNum: student.rollNum,
+            id: student._id,
         };
     })
 
-    const StudentsButtonHaver = ({ row }) =>{
-        const options = ['Take Attendance' , 'Provide Marks'];
+    const StudentsButtonHaver = ({ row }) => {
+        const options = ['Take Attendance', 'Provide Marks'];
 
-        const [open , setOpen] = React.useState(false);
+        const [open, setOpen] = React.useState(false);
         const anchorRef = React.useRef(null);
-        const [selectedIndex , setselectedIndex] = React.useState(0);\
+        const [selectedIndex, setselectedIndex] = React.useState(0); \
 
-        const handleClick = () =>{
+        const handleClick = () => {
             console.info(`You Clicked ${options[selectedIndex]}`);
-            if(selectedIndex === 0){
+            if (selectedIndex === 0) {
                 handleAttendance();
             }
-            else if(selectedIndex === 1){
+            else if (selectedIndex === 1) {
                 handleMarks();
             }
         };
 
-        const handleAttendance = () =>{
+        const handleAttendance = () => {
             navigate(`/Teacher/class/student/attendance/${row.id}/${subjectID}`);
         };
 
@@ -71,5 +71,55 @@ const TeacherClassDetails = () =>{
         const handleToggle = () => {
             setOpen((prevOpen) => !prevOpen);
         };
-    }
-}
+        const handleClose = (event) => {
+            if (anchorRef.current && anchorRef.current.contains(event.target)) {
+                return;
+            }
+            setOpen(false);
+        };
+        return (
+            <>
+                <BlueButton variant="contained" onclick={() => {
+                    navigate("/Teacher/class/student/" + row.id);
+                }}>
+                    View
+                </BlueButton>
+                <React.Fragment>
+                    <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button" >
+                        <BlackButton size="small" aria-control={open ? 'split-button-menu' : undefined} aria-expanded={open ? "true" : undefined} aria-label="select merge strategy" aria-haspopup="menu" onClick={handleToggle}>
+                            {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+                        </BlackButton>
+                    </ButtonGroup>
+                    <Popper sx={{ zIndex: 1 }} open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                        {({ TransitionProps, placement }) => {
+                            <Grow
+                                {...TransitionProps}
+                                style={{
+                                    transformOrigin:
+                                        placement === 'bottom' ? 'center top' : 'center bottom';
+                                }}
+                            >
+                                <Paper>
+                                    <ClickAwayListener onClickAway={handleClose}>
+                                        <MenuList id="split-button-menu" autoFocusItem>
+                                            {options.map((option, index) => {
+                                                <MenuItem 
+                                                    key={option}
+                                                    disabled={index === 2}
+                                                    selected={index === selectedIndex} 
+                                                    onClick={(event) => handleMenuItemClick(event, index)}
+                                                >
+                                                    {option}
+                                                </MenuItem>
+                                            })}
+                                        </MenuList>
+                                    </ClickAwayListener>
+                                </Paper>
+                            </Grow>
+                        }}
+                    </Popper>
+                </React.Fragment>
+            </>
+        );
+    };
+};
