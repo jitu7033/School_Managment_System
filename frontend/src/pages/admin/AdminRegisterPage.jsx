@@ -201,3 +201,8 @@ const AdminRegisterPage = () => {
 
 export default AdminRegisterPage;
 
+const StyledLink = styled(Link)`
+  margin-top:9px;
+  text-decoration:none,
+  color: #7f56da;
+`;
