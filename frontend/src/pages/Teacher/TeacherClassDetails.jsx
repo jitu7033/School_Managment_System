@@ -43,7 +43,7 @@ const TeacherClassDetails = () => {
 
         const [open, setOpen] = React.useState(false);
         const anchorRef = React.useRef(null);
-        const [selectedIndex, setselectedIndex] = React.useState(0); \
+        const [selectedIndex, setselectedIndex] = React.useState(0); 
 
         const handleClick = () => {
             console.info(`You Clicked ${options[selectedIndex]}`);
@@ -96,7 +96,7 @@ const TeacherClassDetails = () => {
                                 {...TransitionProps}
                                 style={{
                                     transformOrigin:
-                                        placement === 'bottom' ? 'center top' : 'center bottom';
+                                        placement === 'bottom' ? 'center top' : 'center bottom'
                                 }}
                             >
                                 <Paper>
