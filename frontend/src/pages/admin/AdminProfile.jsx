@@ -10,10 +10,10 @@ const AdminProfile = () => {
         <br />
         Email:{currUser.email}
         <br />
-        School:{currUser.school}
+        School:{currUser.schoolName}
         <br />
     </div>
   )
 }
 
-export default AdminProfile
+export default AdminProfile;
