@@ -103,10 +103,10 @@ const TeacherClassDetails = () => {
                                     <ClickAwayListener onClickAway={handleClose}>
                                         <MenuList id="split-button-menu" autoFocusItem>
                                             {options.map((option, index) => {
-                                                <MenuItem 
+                                                <MenuItem
                                                     key={option}
                                                     disabled={index === 2}
-                                                    selected={index === selectedIndex} 
+                                                    selected={index === selectedIndex}
                                                     onClick={(event) => handleMenuItemClick(event, index)}
                                                 >
                                                     {option}
@@ -134,17 +134,17 @@ const TeacherClassDetails = () => {
                     </Typography>
                     {getresponse ? (
                         <>
-                            <Box sx = {{display:'flex' , justifyContent:'flex-end' , marginTop:'16px'}}>
+                            <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px' }}>
                                 No Students Found
                             </Box>
                         </>
                     ) : (
-                        <Paper sx = {{ width: '100%', overflow:'hidden'}}>
+                        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
                             <Typography variant="h5" gutterBottom>
                                 Students List:
                             </Typography>
-                            {Array.isArray(sclassStudents) && sclassStudents.length >0 && 
-                                        <TableTemplate buttomHaver={StudentsButtonHaver} columns={studentColumns} rows={studentRows}/>
+                            {Array.isArray(sclassStudents) && sclassStudents.length > 0 &&
+                                <TableTemplate buttomHaver={StudentsButtonHaver} columns={studentColumns} rows={studentRows} />
                             }
                         </Paper>
                     )}
