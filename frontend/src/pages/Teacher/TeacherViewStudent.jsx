@@ -9,7 +9,7 @@ import CustomPieChart from '../../components/CustomPieChart'
 import { PurpleButton } from '../../components/buttonStyles';
 import { StyledTableCell, StyledTableRow } from '../../components/styles';
 
-const TeacherViewSubject =() =>{
+const TeacherViewStudent =() =>{
     const navigate = useNavigate();
     const params = useParams();
     const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const TeacherViewSubject =() =>{
 
     const [openStates , setOpenState] = useState({});
 
-    const handleopen = (subid) =>{
+    const handleOpen = (subid) =>{
         setOpenState((prevState) =>({
             ...prevState,
             [subid] : !prevState[subid],
@@ -54,7 +54,7 @@ const TeacherViewSubject =() =>{
 
     const overallAbsentPercentage = 100 - overallAttendancePercentage;
 
-    const charData =[
+    const chartData =[
         { name: 'Present', value: overallAttendancePercentage },
         { name: 'Absent', value : overallAbsentPercentage },
     ];
@@ -103,17 +103,106 @@ const TeacherViewSubject =() =>{
                                                     </StyledTableRow>
                                                     <StyledTableRow>
                                                         <StyledTableCell style={{ paddingBottom :0 , paddingTop : 0}} colSpan={6}>
-                                                            
+                                                            <Collapse in={openStates[subId]} timeout="auto" unmountOnExit>
+                                                                <Box sx={{ margin: 1 }}>
+                                                                    <Typography variant="h6" gutterBottom component="div">
+                                                                        Attendance Details
+                                                                    </Typography>
+                                                                    <Table size="small" aria-label="purchases">
+                                                                        <TableHead>
+                                                                            <StyledTableRow>
+                                                                                <StyledTableCell>Date</StyledTableCell>
+                                                                                <StyledTableCell align="right">Status</StyledTableCell>
+                                                                            </StyledTableRow>
+                                                                        </TableHead>
+                                                                        <TableBody>
+                                                                            {allData.map((data, index) => {
+                                                                                const date = new Date(data.date);
+                                                                                const dateString = date.toString() !== "Invalid Date" ? date.toISOString().substring(0, 10) : "Invalid Date";
+                                                                                return (
+                                                                                    <StyledTableRow key={index}>
+                                                                                        <StyledTableCell component="th" scope="row">
+                                                                                            {dateString}
+                                                                                        </StyledTableCell>
+                                                                                        <StyledTableCell align="right">{data.status}</StyledTableCell>
+                                                                                    </StyledTableRow>
+                                                                                );
+                                                                            })}
+                                                                        </TableBody>
+                                                                    </Table>
+                                                                </Box>
+                                                            </Collapse>
                                                         </StyledTableCell>
                                                     </StyledTableRow>
                                                 </TableBody>
                                             </Table>
                                         )
                                     }
+                                    else{
+                                        return null;
+                                    }
                                 })}
-                           </>}
-                </div>}
+                                <div>
+                                    Overall Attendance Percentage : {overallAttendancePercentage.toFixed(2)}%;
+                                </div>
+
+                                <CustomPieChart data ={chartData} />
+                           </>
+                           }
+                           <br/><br/>
+                           <Button
+                                variant="contained"
+                                onClick={()=>
+                                    navigate(`/Teacher/class/student/attendance/${studentID}/${teachSubjectID}`
+
+                                    )
+                                }
+                            >
+                                Add Attendance
+                            </Button>
+                        <br /><br /><br />
+                        <h3>Subject Marks</h3>
+
+                    {subjectMarks && Array.isArray(subjectMarks) && subjectMarks.length > 0 &&
+                        <>
+                            {subjectMarks.map((result, index) => {
+                                if (result.subName.subName === teachSubject) {
+                                    return (
+                                        <Table key={index}>
+                                            <TableHead>
+                                                <StyledTableRow>
+                                                    <StyledTableCell>Subject</StyledTableCell>
+                                                    <StyledTableCell>Marks</StyledTableCell>
+                                                </StyledTableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                <StyledTableRow>
+                                                    <StyledTableCell>{result.subName.subName}</StyledTableCell>
+                                                    <StyledTableCell>{result.marksObtained}</StyledTableCell>
+                                                </StyledTableRow>
+                                            </TableBody>
+                                        </Table>
+                                    )
+                                }
+                                else if (!result.subName || !result.marksObtained) {
+                                    return null;
+                                }
+                                return null
+                            })}
+                        </>
+                    }
+                    <PurpleButton variant="contained"
+                        onClick={() =>
+                            navigate(
+                                `/Teacher/class/student/marks/${studentID}/${teachSubjectID}`
+                            )}>
+                        Add Marks
+                    </PurpleButton>
+                    <br /><br /><br />
+                </div>
+            }
         </>
     )
-
 }
+
+export default TeacherViewStudent;
