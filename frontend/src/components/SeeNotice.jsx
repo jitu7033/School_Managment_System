@@ -28,7 +28,7 @@ const SeeNotice =() =>{
         { id: 'date', label: 'Date', minWidth: 170 },
     ];
 
-    const noticeRows = noticeList.map((notice) =>{
+    const noticeRows = noticesList.map((notice) =>{
         const date = new Date(notice.date);
         const dateString = date.toString() !== "Invalid Date"  ? date.toISOString().substring(0,10) : "Invalid Date";
 
