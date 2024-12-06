@@ -12,27 +12,6 @@ import { getAllSclasses } from '../../redux/sclassRelated/sclassHandle';
 import { getAllStudents } from '../../redux/studentRelated/studentHandle';
 import { getAllTeachers } from '../../redux/teacherRelated/teacherHandle';
 
-
-const StyledPaper = styled(Paper)`
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  height: 200px;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-`;
-
-const Title = styled.p`
-  font-size: 1.25rem;
-`;
-
-const Data = styled(CountUp)`
-  font-size: calc(1.3rem + .6vw);
-  color: green;
-`;
-
-
 const AdminHomePage = () => {
     const dispatch = useDispatch();
     const { studentsList } = useSelector((state) => state.student);
@@ -103,4 +82,24 @@ const AdminHomePage = () => {
     );
 };
 
-export default AdminHomePage ; 
+
+const StyledPaper = styled(Paper)`
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+`;
+
+const Title = styled.p`
+  font-size: 1.25rem;
+`;
+
+const Data = styled(CountUp)`
+  font-size: calc(1.3rem + .6vw);
+  color: green;
+`;
+
+export default AdminHomePage

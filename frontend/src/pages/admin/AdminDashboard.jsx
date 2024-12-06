@@ -11,35 +11,36 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { AppBar, Drawer } from '../../components/styles';
+import { AppBar, Drawer } from '../../components/Styles';
 import Logout from '../Logout';
 import SideBar from './SideBar';
 import AdminProfile from './AdminProfile';
 import AdminHomePage from './AdminHomePage';
 
-import AddStudent from './studentRelated/AddStudent';
-import SeeComplains from './studentRelated/SeeComplains';
-import ShowStudents from './studentRelated/ShowStudents';
-import StudentAttendance from './studentRelated/StudentAttendance';
-import StudentExamMarks from './studentRelated/StudentExamMarks';
-import ViewStudent from './studentRelated/ViewStudent';
 
-import AddNotice from './noticeRelated/AddNotice';
-import ShowNotices from './noticeRelated/ShowNotices';
+import AddStudent from './studentReleated/AddStudent';
+import SeeComplains from './studentReleated/SeeComplains';
+import ShowStudents from './studentReleated/ShowStudents';
+import StudentAttendance from './studentReleated/StudentAttendence';
+import StudentExamMarks from './studentReleated/StudentExamMarks';
+import ViewStudent from './studentReleated/ViewStudent';
 
-import ShowSubjects from './subjectRelated/ShowSubjects';
-import SubjectForm from './subjectRelated/SubjectForm';
-import ViewSubject from './subjectRelated/ViewSubject';
+import AddNotice from './noticeReleated/AddNotice';
+import ShowNotices from './noticeReleated/ShowNotices';
 
-import AddTeacher from './teacherRelated/AddTeacher';
-import ChooseClass from './teacherRelated/ChooseClass';
-import ChooseSubject from './teacherRelated/ChooseSubject';
-import ShowTeachers from './teacherRelated/ShowTeachers';
-import TeacherDetails from './teacherRelated/TeacherDetails';
+import ShowSubjects from './subjectReleated/ShowSubject';
+import SubjectForm from './subjectReleated/SubjectForm';
+import ViewSubject from './subjectReleated/ViewSubject';
 
-import AddClass from './classRelated/AddClass';
-import ClassDetails from './classRelated/ClassDetails';
-import ShowClasses from './classRelated/ShowClasses';
+import AddTeacher from './teacherReleated/AddTeacher';
+import ChooseClass from './teacherReleated/ChooseClass';
+import ChooseSubject from './teacherReleated/chooseSubject';
+import ShowTeachers from './teacherReleated/ShowTeacher';
+import TeacherDetails from './teacherReleated/TeacherDetails';
+
+import AddClass from './classReleated/AddClass';
+import ClassDetails from './classReleated/ClassDetails';
+import ShowClasses from './classReleated/ShowClasses';
 import AccountMenu from '../../components/AccountMenu';
 
 

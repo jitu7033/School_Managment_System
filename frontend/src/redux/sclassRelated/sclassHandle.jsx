@@ -85,6 +85,7 @@ export const getTeacherFreeClassSubjects = (id) => async (dispatch) => {
     }
 }
 
+
 export const getSubjectDetails = (id, address) => async (dispatch) => {
     dispatch(getSubDetailsRequest());
 

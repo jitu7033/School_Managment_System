@@ -1,64 +1,72 @@
 import { useState } from 'react';
-import { CssBaseline , Box , Toolbar , List , Typography , Divider , IconButton } from '@mui/material';
-
+import {
+    CssBaseline,
+    Box,
+    Toolbar,
+    List,
+    Typography,
+    Divider,
+    IconButton,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import TeacherSideBar from './TeacherSideBar';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Logout from '../Logout'
 import AccountMenu from '../../components/AccountMenu';
-import { AppBar, Drawer } from '../../components/styles';
-import StudentAttendance from '../admin/studentRelated/StudentAttendance';
+import { AppBar, Drawer } from '../../components/Styles';
+import StudentAttendance from '../admin/studentReleated/StudentAttendence';
 
 import TeacherClassDetails from './TeacherClassDetails';
-import TeacherComplain from '../Teacher/TeacherComplains';
-import TeacherHomePage from '../Teacher/TeacherHomePage';
-import TeacherProfile from '../Teacher/TeacherProfile';
+import TeacherComplain from './TeacherComplains';
+import TeacherHomePage from './TeacherHomePage';
+import TeacherProfile from './TeacherProfile';
 import TeacherViewStudent from './TeacherViewStudent';
-import StudentExamMarks from '../admin/studentRelated/StudentExamMarks';
+import StudentExamMarks from '../admin/studentReleated/StudentExamMarks';
 
-const TeacherDashboard = () =>{
-    const [open , setOpen] = useState(true);
+const TeacherDashboard = () => {
+    const [open, setOpen] = useState(true);
     const toggleDrawer = () => {
         setOpen(!open);
     };
 
     return (
         <>
-            <Box sx={{display:'flex'}}>
+            <Box sx={{ display: 'flex' }}>
                 <CssBaseline />
                 <AppBar open={open} position='absolute'>
-                    <Toolbar sx={{ pr:'24px'}}>
+                    <Toolbar sx={{ pr: '24px' }}>
                         <IconButton
                             edge="start"
                             color="inherit"
                             aria-label="open drawer"
                             onClick={toggleDrawer}
                             sx={{
-                                marginRight:'36px',
-                                ...(open && {display:'none'}),
+                                marginRight: '36px',
+                                ...(open && { display: 'none' }),
                             }}
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                            <Typography
-                                component="h1"
-                                variant="h6"
-                                noWrap
-                                sx={{ flexGrow :1}}
-                            >
-                                Teacher DashBoard
-                            </Typography>
-                            <AccountMenu />
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography
+                            component="h1"
+                            variant="h6"
+                            color="inherit"
+                            noWrap
+                            sx={{ flexGrow: 1 }}
+                        >
+                            Teacher Dashboard
+                        </Typography>
+                        <AccountMenu />
                     </Toolbar>
                 </AppBar>
-                <Drawer variant="permanent" open={open} sx={open ? StyleSheet.drawerStyled : styles.hideDrawer}>
+                <Drawer variant="permanent" open={open} sx={open ? styles.drawerStyled : styles.hideDrawer}>
                     <Toolbar sx={styles.toolBarStyled}>
                         <IconButton onClick={toggleDrawer}>
-                            <ChevronLeftIcon/>
+                            <ChevronLeftIcon />
                         </IconButton>
                     </Toolbar>
-                    <Divider/>
+                    <Divider />
                     <List component="nav">
                         <TeacherSideBar />
                     </List>
@@ -87,7 +95,7 @@ const TeacherDashboard = () =>{
     );
 }
 
-export default TeacherDashboard;
+export default TeacherDashboard
 
 const styles = {
     boxStyled: {

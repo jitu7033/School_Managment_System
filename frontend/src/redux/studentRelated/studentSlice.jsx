@@ -1,56 +1,57 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
-const initialState={
-    studentsList : [],
-    loading : false,
-    error : null,
-    response : null,
-    stateStatus : "idle"
-}
+const initialState = {
+    studentsList: [],
+    loading: false,
+    error: null,
+    response: null,
+    statestatus: "idle",
+};
 
 const studentSlice = createSlice({
-    name : 'student',
+    name: 'student',
     initialState,
-    reducers:{
-        getRequest : (state) => {
-            state.loading =  true;
+    reducers: {
+        getRequest: (state) => {
+            state.loading = true;
         },
-        stuffDone : (state) => {
+        stuffDone: (state) => {
             state.loading = false;
-            state.error = false;
+            state.error = null;
             state.response = null;
-            state.stateStatus = "added";
+            state.statestatus = "added";
         },
-        getSuccess : (state,action) =>{
+        getSuccess: (state, action) => {
             state.studentsList = action.payload;
             state.loading = false;
             state.error = null;
             state.response = null;
         },
-        getFailed : (state,action) =>{
+        getFailed: (state, action) => {
             state.response = action.payload;
             state.loading = false;
             state.error = null;
         },
-        getError : (state,action) => {
+        getError: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         },
-        underStudentControl : (state) => {
+        underStudentControl: (state) => {
             state.loading = false;
             state.response = null;
             state.error = null;
-            state.stateStatus = "idle";
+            state.statestatus = "idle";
         }
-    }
+    },
 });
 
 export const {
     getRequest,
     getSuccess,
     getFailed,
+    getError,
     underStudentControl,
-    stuffDone
+    stuffDone,
 } = studentSlice.actions;
 
 export const studentReducer = studentSlice.reducer;
