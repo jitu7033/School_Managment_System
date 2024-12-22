@@ -9,10 +9,10 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { KeyboardArrowUp, KeyboardArrowDown, Delete as DeleteIcon } from '@mui/icons-material';
 import { removeStuff, updateStudentFields } from '../../../redux/studentRelated/studentHandle';
-import { calculateOverallAttendancePercentage, calculateSubjectAttendancePercentage, groupAttendanceBySubject } from '../../../components/attendanceCalculator';
+import { calculateOverallAttendancePercentage, calculateSubjectAttendancePercentage, groupAttendanceBySubject } from '../../../components/AttendenceCalculate';
 import CustomBarChart from '../../../components/CustomBarChart'
 import CustomPieChart from '../../../components/CustomPieChart'
-import { StyledTableCell, StyledTableRow } from '../../../components/styles';
+import { StyledTableCell, StyledTableRow } from '../../../components/Styles';
 
 import InsertChartIcon from '@mui/icons-material/InsertChart';
 import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
@@ -53,7 +53,7 @@ const ViewStudent = () => {
     const [subjectMarks,setSubjectMarks] = useState('')
     const [subjectAttendance,setSubjectAttendance] = useState([]);
 
-    const [openState,setopenState] = useState({});
+    const [openStates,setopenState] = useState({});
 
 
     const [showPopup,setShowPopup] = useState(false);
@@ -66,10 +66,20 @@ const ViewStudent = () => {
         }));
     }
 
-    const [selectedSelection,setSelectedSelection] = useState('table');
+    const [value, setValue] = useState('1');
+
+    const [selectedSection,setselectedSection] = useState('table');
+
+
     const handleSectionChange = (event,newSection) => {
-        setSelectedSelection(newSection);
+        setselectedSection(newSection);
     }
+
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
 
     const fields = password === ""
     ? {name,rollNum} 

@@ -69,7 +69,7 @@ const CustomBarChart = ({ chartData, dataKey }) => {
 
 // helper function to generate distnict color 
 
-const distinctColors = (count) => {
+const generateDistinctColors = (count) => {
     const colors = [];
     const goldenRatioConjugate = 0.618033988749895;
     for(let i = 0; i < count; i++){
