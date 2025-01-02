@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { deleteUser } from '../../../redux/userRelated/userHandle';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
-import { StyledTableCell, StyledTableRow } from '../../../components/styles';
+import { StyledTableCell, StyledTableRow } from '../../../components/Styles';
 import { BlueButton, GreenButton } from '../../../components/buttonStyles';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import SpeedDialTemplate from '../../../components/SpeedDialTemplate';
