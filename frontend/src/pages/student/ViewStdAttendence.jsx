@@ -3,7 +3,7 @@ import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
 import { BottomNavigation, BottomNavigationAction, Box, Button, Collapse, Paper, Table, TableBody, TableHead, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserDetails } from '../../redux/userRelated/userHandle';
-import { calculateOverallAttendancePercentage, calculateSubjectAttendancePercentage, groupAttendanceBySubject } from '../../components/AttendenceCalculate';
+import { calculateOverallAttendancePercentage, calculateSubjectAttendancePercentage, groupAttendanceBySubject } from '../../components/attendenceCalculator';
 
 import CustomBarChart from '../../components/CustomBarChart'
 
@@ -11,7 +11,7 @@ import InsertChartIcon from '@mui/icons-material/InsertChart';
 import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
-import { StyledTableCell, StyledTableRow } from '../../components/Styles';
+import { StyledTableCell, StyledTableRow } from '../../components/styles';
 
 const ViewStdAttendance = () => {
     const dispatch = useDispatch();

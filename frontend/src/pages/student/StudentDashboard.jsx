@@ -19,7 +19,7 @@ import ViewStdAttendance from './ViewStdAttendence';
 import StudentComplain from './StudentComplains';
 import Logout from '../Logout'
 import AccountMenu from '../../components/AccountMenu';
-import { AppBar, Drawer } from '../../components/Styles';
+import { AppBar, Drawer } from '../../components/styles';
 
 const StudentDashboard = () => {
     const [open, setOpen] = useState(true);

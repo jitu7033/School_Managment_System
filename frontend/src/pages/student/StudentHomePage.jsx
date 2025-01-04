@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Grid, Paper, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux';
-import { calculateOverallAttendancePercentage } from '../../components/AttendenceCalculate';
+import { calculateOverallAttendancePercentage } from '../../components/attendenceCalculator';
 import CustomPieChart from '../../components/CustomPieChart';
 import { getUserDetails } from '../../redux/userRelated/userHandle';
 import styled from 'styled-components';

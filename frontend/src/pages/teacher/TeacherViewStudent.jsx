@@ -4,10 +4,10 @@ import { getUserDetails } from '../../redux/userRelated/userHandle';
 import { useNavigate, useParams } from 'react-router-dom'
 import { Box, Button, Collapse, Table, TableBody, TableHead, Typography } from '@mui/material';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
-import { calculateOverallAttendancePercentage, calculateSubjectAttendancePercentage, groupAttendanceBySubject } from '../../components/AttendenceCalculate';
+import { calculateOverallAttendancePercentage, calculateSubjectAttendancePercentage, groupAttendanceBySubject } from '../../components/attendenceCalculator';
 import CustomPieChart from '../../components/CustomPieChart'
 import { PurpleButton } from '../../components/buttonStyles';
-import { StyledTableCell, StyledTableRow } from '../../components/Styles';
+import { StyledTableCell, StyledTableRow } from '../../components/styles';
 
 const TeacherViewStudent =() =>{
     const navigate = useNavigate();

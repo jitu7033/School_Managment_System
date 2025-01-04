@@ -9,10 +9,10 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { KeyboardArrowUp, KeyboardArrowDown, Delete as DeleteIcon } from '@mui/icons-material';
 import { removeStuff, updateStudentFields } from '../../../redux/studentRelated/studentHandle';
-import { calculateOverallAttendancePercentage, calculateSubjectAttendancePercentage, groupAttendanceBySubject } from '../../../components/AttendenceCalculate';
+import { calculateOverallAttendancePercentage, calculateSubjectAttendancePercentage, groupAttendanceBySubject } from '../../../components/attendenceCalculator';
 import CustomBarChart from '../../../components/CustomBarChart'
 import CustomPieChart from '../../../components/CustomPieChart'
-import { StyledTableCell, StyledTableRow } from '../../../components/Styles';
+import { StyledTableCell, StyledTableRow } from '../../../components/styles';
 
 import InsertChartIcon from '@mui/icons-material/InsertChart';
 import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';

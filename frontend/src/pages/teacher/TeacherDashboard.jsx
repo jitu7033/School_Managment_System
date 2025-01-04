@@ -14,7 +14,7 @@ import TeacherSideBar from './TeacherSideBar';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Logout from '../Logout'
 import AccountMenu from '../../components/AccountMenu';
-import { AppBar, Drawer } from '../../components/Styles';
+import { AppBar, Drawer } from '../../components/styles';
 import StudentAttendance from '../admin/studentReleated/StudentAttendence';
 
 import TeacherClassDetails from './TeacherClassDetails';
