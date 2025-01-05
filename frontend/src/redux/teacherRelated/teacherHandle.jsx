@@ -17,7 +17,7 @@ export const getAllTeachers = (id) => async (dispatch) => {
     }
 };
 
-export const getTeachersDetails = (id) => async (dispatch) => {
+export const getTeacherDetails = (id) => async (dispatch) => {
     dispatch(getRequest());
 
     try {

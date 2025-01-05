@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyledTableCell, StyledTableRow } from './Styles';
+import { StyledTableCell, StyledTableRow } from './styles';
 import { Table, TableBody, TableContainer, TableHead, TablePagination } from '@mui/material';
 
 const TableTemplate = ({ buttonHaver: ButtonHaver, columns, rows }) => {

@@ -1,49 +1,49 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const teacherSchema = new mongoose.Schema({
-    name : {
-        type : String,
-        required : true
+    name: {
+        type: String,
+        required: true,
     },
     email: {
         type: String,
-        unique : true,
-        required: true
+        unique: true,
+        required: true,
     },
     password: {
         type: String,
-        required: true
+        required: true,
     },
     role: {
         type: String,
-        default : "teacher"
+        default: "Teacher"
     },
     school: {
         type: mongoose.Schema.Types.ObjectId,
-        ref : "admin"
+        ref: 'admin',
+        required: true,
     },
-    teachSubject : {
+    teachSubject: {
         type: mongoose.Schema.Types.ObjectId,
-        ref : "subject"
-
+        ref: 'subject',
     },
     teachSclass: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "sclass",
-        require : true
+        ref: 'sclass',
+        required: true,
     },
-    attendance : {
-        data:{
-            type : data,
-            required : true
+    attendance: [{
+        date: {
+            type: Date,
+            required: true
         },
-        presentcount : {
-            type : String
+        presentCount: {
+            type: String,
         },
-        absentcount : {
-            type : String
+        absentCount: {
+            type: String,
         }
-    }
-} , { timestamps : true});
+    }]
+}, { timestamps: true });
 
-module.exports = mongoose.model("teacher", teacherSchema);
+module.exports = mongoose.model("teacher", teacherSchema)
