@@ -11,7 +11,7 @@ const AddTeacher = () => {
   const params = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
+  
   const subjectID = params.id
 
   const { status, response, error } = useSelector(state => state.user);

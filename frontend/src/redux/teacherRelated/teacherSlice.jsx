@@ -9,34 +9,34 @@ const initialState = {
 };
 
 const teacherSlice = createSlice({
-    name : 'teacher',
+    name: 'teacher',
     initialState,
-    reducer : {
-        getRequest : (state) => {
+    reducers: {
+        getRequest: (state) => {
             state.loading = true;
         },
-        doneSuccess : (state , action) => {
+        doneSuccess: (state, action) => {
             state.teacherDetails = action.payload;
             state.loading = false;
             state.error = null;
             state.response = null;
         },
-        getSuccess : (state , action) => {
+        getSuccess: (state, action) => {
             state.teachersList = action.payload;
             state.loading = false;
             state.error = null;
             state.response = null;
         },
-        getFailed : (state , action) =>{
+        getFailed: (state, action) => {
             state.response = action.payload;
             state.loading = false;
             state.error = null;
         },
-        getError : (state,action) =>{
+        getError: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         },
-        postDone : (state,action) =>{
+        postDone: (state) => {
             state.loading = false;
             state.error = null;
             state.response = null;
@@ -50,7 +50,7 @@ export const {
     getFailed,
     getError,
     doneSuccess,
-    postDone,
+    postDone
 } = teacherSlice.actions;
 
 export const teacherReducer = teacherSlice.reducer;
