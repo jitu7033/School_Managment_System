@@ -1,8 +1,9 @@
-import react from 'react'
 
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 
-const COLORS = ['#326e0a','#930909'];
+import React from 'react';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+
+const COLORS = ['#326e0a', '#930909'];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {

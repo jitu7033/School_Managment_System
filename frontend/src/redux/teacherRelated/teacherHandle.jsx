@@ -1,6 +1,12 @@
 import axios from 'axios';
-
-import { getRequest, getSuccess, getFailed, getError, postDone, doneSuccess } from './teacherSlice';
+import {
+    getRequest,
+    getSuccess,
+    getFailed,
+    getError,
+    postDone,
+    doneSuccess
+} from './teacherSlice';
 
 export const getAllTeachers = (id) => async (dispatch) => {
     dispatch(getRequest());
@@ -15,7 +21,7 @@ export const getAllTeachers = (id) => async (dispatch) => {
     } catch (error) {
         dispatch(getError(error));
     }
-};
+}
 
 export const getTeacherDetails = (id) => async (dispatch) => {
     dispatch(getRequest());
@@ -28,17 +34,17 @@ export const getTeacherDetails = (id) => async (dispatch) => {
     } catch (error) {
         dispatch(getError(error));
     }
-};
+}
 
 export const updateTeachSubject = (teacherId, teachSubject) => async (dispatch) => {
     dispatch(getRequest());
 
     try {
-        await axios.get(`${process.env.REACT_APP_BASE_URL}/TeachersSubject`, { teacherId, teachSubject }, {
+        await axios.put(`${process.env.REACT_APP_BASE_URL}/TeacherSubject`, { teacherId, teachSubject }, {
             headers: { 'Content-Type': 'application/json' },
         });
         dispatch(postDone());
     } catch (error) {
         dispatch(getError(error));
     }
-};
+}

@@ -5,19 +5,19 @@ import {
     tableCellClasses,
     Drawer as MuiDrawer,
     AppBar as MuiAppBar,
-    backdropClasses
-}from "@mui/material";
+} from "@mui/material";
 
+const drawerWidth = 240
 
-export const StyledTableCell = styled(TableCell)(({ theme })=>({
-    [`&.${tableCellClasses.head}`] : {
-        backgroundColor : theme.palette.common.black,
-        color : theme.palette.common.white,
+export const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
     },
-}))
+}));
 
 export const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
@@ -28,7 +28,6 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
         border: 0,
     },
 }));
-
 
 export const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
@@ -47,7 +46,6 @@ export const AppBar = styled(MuiAppBar, {
         }),
     }),
 }));
-
 
 export const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -74,5 +72,3 @@ export const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 
         },
     }),
 );
-
-const drawerWidth = 240;

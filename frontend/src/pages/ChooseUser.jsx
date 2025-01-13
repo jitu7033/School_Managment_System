@@ -63,7 +63,7 @@ const ChooseUser = ({ visitor }) => {
       }
     }
   }
-  
+
   useEffect(() => {
     if (status === 'success' || currentUser !== null) {
       if (currentRole === 'Admin') {

@@ -6,51 +6,42 @@ import { underControl } from '../../../redux/userRelated/userSlice';
 import { CircularProgress } from '@mui/material';
 import Popup from '../../../components/Popup';
 
-
 const AddNotice = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { status, response, error } = useSelector(state => state.user);
+  const { currentUser } = useSelector(state => state.user);
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const {status,response,error} = useSelector(state => state.user);
-    const {currentUser} = useSelector((state) => state.user);
+  const [title, setTitle] = useState('');
+  const [details, setDetails] = useState('');
+  const [date, setDate] = useState('');
+  const adminID = currentUser._id
 
+  const [loader, setLoader] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [message, setMessage] = useState("");
 
-    const [title,setTitle] = useState('');
-    const [details,setDetails] = useState('');
-    const [date,setDate] = useState('')
-    const adminID = currentUser._id;
+  const fields = { title, details, date, adminID };
+  const address = "Notice"
 
-    const [loader,setLoader] = useState(true);
-    const [message,setMessage] = useState('')
-    const [showPopup,setShowPopup] = useState(false);
+  const submitHandler = (event) => {
+    event.preventDefault();
+    setLoader(true);
+    dispatch(addStuff(fields, address));
+  };
 
-    const fields = {title,details,date,adminID}
-    const address = "Notice";
-
-
-    const submitHandler = (event) =>{
-        event.preventDefault();
-        setLoader(true);
-        dispatch(addStuff(fields,address));
+  useEffect(() => {
+    if (status === 'added') {
+      navigate('/Admin/notices');
+      dispatch(underControl())
+    } else if (status === 'error') {
+      setMessage("Network Error")
+      setShowPopup(true)
+      setLoader(false)
     }
+  }, [status, navigate, error, response, dispatch]);
 
-
-    useEffect(() => {
-        if(status == "added"){
-            navigate('/Admin/notices');
-            dispatch(underControl());
-        }
-        else if(status == "error"){
-            setMessage("Network Error");
-            setShowPopup(true);
-            setLoader(false);
-        }
-    },[status,navigate,error,response,dispatch]);
-
-
-
-
-return (
+  return (
     <>
       <div className="register">
         <form className="registerForm" onSubmit={submitHandler}>
@@ -87,4 +78,4 @@ return (
   );
 };
 
-export default AddNotice
+export default AddNotice;

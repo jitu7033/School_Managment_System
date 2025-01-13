@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
 import { getTeacherDetails } from '../../../redux/teacherRelated/teacherHandle';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Container, Typography } from '@mui/material';
 

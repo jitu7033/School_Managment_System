@@ -5,7 +5,6 @@ import { getUserDetails } from '../../../redux/userRelated/userHandle';
 import { getSubjectList } from '../../../redux/sclassRelated/sclassHandle';
 import { updateStudentFields } from '../../../redux/studentRelated/studentHandle';
 
-
 import {
     Box, InputLabel,
     MenuItem, Select,
@@ -15,49 +14,42 @@ import {
 import { PurpleButton } from '../../../components/buttonStyles';
 import Popup from '../../../components/Popup';
 
-const StudentAttendence = ({situation}) => {
-
+const StudentAttendance = ({ situation }) => {
     const dispatch = useDispatch();
-    const {currentUser,userDetails,loading} = useSelector((state) => state.user);
-    const {subjectsList} = useSelector((state)=>state.sclass);
-    const {response,error,statestatus} = useSelector((state) => state.student);
-    const params = useParams();
+    const { currentUser, userDetails, loading } = useSelector((state) => state.user);
+    const { subjectsList } = useSelector((state) => state.sclass);
+    const { response, error, statestatus } = useSelector((state) => state.student);
+    const params = useParams()
 
-
-    const [studentID,setStudentID] = useState("");
-    const [subjectName,setSubjectName] = useState("");
+    const [studentID, setStudentID] = useState("");
+    const [subjectName, setSubjectName] = useState("");
     const [chosenSubName, setChosenSubName] = useState("");
     const [status, setStatus] = useState('');
     const [date, setDate] = useState('');
-
 
     const [showPopup, setShowPopup] = useState(false);
     const [message, setMessage] = useState("");
     const [loader, setLoader] = useState(false)
 
-
-    useEffect(()=>{
-        if(situation === "Student"){
+    useEffect(() => {
+        if (situation === "Student") {
             setStudentID(params.id);
-            const stdID = params.id;
-            dispatch(getUserDetails(studentID,"Student"));
+            const stdID = params.id
+            dispatch(getUserDetails(stdID, "Student"));
         }
-        else if(situation === "Subject"){
+        else if (situation === "Subject") {
             const { studentID, subjectID } = params
             setStudentID(studentID);
             dispatch(getUserDetails(studentID, "Student"));
             setChosenSubName(subjectID);
         }
-    },[situation])
+    }, [situation]);
 
-    useEffect(()=>{
+    useEffect(() => {
         if (userDetails && userDetails.sclassName && situation === "Student") {
             dispatch(getSubjectList(userDetails.sclassName._id, "ClassSubjects"));
         }
-
-    },[dispatch,userDetails])
-
-
+    }, [dispatch, userDetails]);
 
     const changeHandler = (event) => {
         const selectedSubject = subjectsList.find(
@@ -92,7 +84,6 @@ const StudentAttendence = ({situation}) => {
             setMessage("Done Successfully")
         }
     }, [response, statestatus, error])
-
 
     return (
         <>
@@ -203,4 +194,4 @@ const StudentAttendence = ({situation}) => {
     )
 }
 
-export default StudentAttendence;
+export default StudentAttendance

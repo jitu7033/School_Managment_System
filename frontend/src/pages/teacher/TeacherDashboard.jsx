@@ -15,14 +15,14 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Logout from '../Logout'
 import AccountMenu from '../../components/AccountMenu';
 import { AppBar, Drawer } from '../../components/styles';
-import StudentAttendance from '../admin/studentReleated/StudentAttendence';
-
+import StudentAttendance from '../admin/studentRelated/StudentAttendance';
 import TeacherClassDetails from './TeacherClassDetails';
-import TeacherComplain from './TeacherComplains';
+import TeacherComplain from './TeacherComplain';
 import TeacherHomePage from './TeacherHomePage';
 import TeacherProfile from './TeacherProfile';
 import TeacherViewStudent from './TeacherViewStudent';
-import StudentExamMarks from '../admin/studentReleated/StudentExamMarks';
+import StudentExamMarks from '../admin/studentRelated/StudentExamMarks';
+
 
 const TeacherDashboard = () => {
     const [open, setOpen] = useState(true);

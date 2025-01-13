@@ -10,13 +10,13 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import StudentSideBar from './StudentSidebar';
+import StudentSideBar from './StudentSideBar';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import StudentHomePage from './StudentHomePage';
 import StudentProfile from './StudentProfile';
-import StudentSubjects from './StudentSubject';
-import ViewStdAttendance from './ViewStdAttendence';
-import StudentComplain from './StudentComplains';
+import StudentSubjects from './StudentSubjects';
+import ViewStdAttendance from './ViewStdAttendance';
+import StudentComplain from './StudentComplain';
 import Logout from '../Logout'
 import AccountMenu from '../../components/AccountMenu';
 import { AppBar, Drawer } from '../../components/styles';

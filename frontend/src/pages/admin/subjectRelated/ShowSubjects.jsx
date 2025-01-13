@@ -13,31 +13,33 @@ import { BlueButton, GreenButton } from '../../../components/buttonStyles';
 import SpeedDialTemplate from '../../../components/SpeedDialTemplate';
 import Popup from '../../../components/Popup';
 
-
-const ShowSubject = () => {
-
-    const navigate = useNavigate();
+const ShowSubjects = () => {
+    const navigate = useNavigate()
     const dispatch = useDispatch();
-    const {subjectsList,loading,error,response} = useSelector((state)=>state.sclass);
-    const {currentUser} = useSelector((state)=>state.user);
+    const { subjectsList, loading, error, response } = useSelector((state) => state.sclass);
+    const { currentUser } = useSelector(state => state.user)
+    
+    useEffect(() => {
+        dispatch(getSubjectList(currentUser._id, "AllSubjects"));
+    }, [currentUser._id, dispatch]);
 
-    useEffect(()=>{
-        dispatch(getSubjectList(currentUser._id,"AllSubjects"));
+    if (error) {
+        console.log(error);
+    }
 
-    },[currentUser._id,dispatch]);
+    const [showPopup, setShowPopup] = useState(false);
+    const [message, setMessage] = useState("");
 
-    const [showPopup,setShowPopup] = useState(false);
-    const [message,setMessage] = useState("");
-
-    const deleteHandler = (deleteID,address) =>{
-        setMessage("sorry the disabled function are not available ");
-        setShowPopup(true);
+    const deleteHandler = (deleteID, address) => {
+        console.log(deleteID);
+        console.log(address);
+        setMessage("Sorry the delete function has been disabled for now.")
+        setShowPopup(true)
 
         // dispatch(deleteUser(deleteID, address))
         //     .then(() => {
         //         dispatch(getSubjectList(currentUser._id, "AllSubjects"));
         //     })
-
     }
 
     const subjectColumns = [
@@ -56,7 +58,6 @@ const ShowSubject = () => {
         };
     })
 
-
     const SubjectsButtonHaver = ({ row }) => {
         return (
             <>
@@ -71,7 +72,6 @@ const ShowSubject = () => {
         );
     };
 
-
     const actions = [
         {
             icon: <PostAddIcon color="primary" />, name: 'Add New Subject',
@@ -83,34 +83,33 @@ const ShowSubject = () => {
         }
     ];
 
-
-
-  return (
-    <>
-    {loading ?
-        <div>Loading...</div>
-        :
+    return (
         <>
-            {response ?
-                <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px' }}>
-                    <GreenButton variant="contained"
-                        onClick={() => navigate("/Admin/subjects/chooseclass")}>
-                        Add Subjects
-                    </GreenButton>
-                </Box>
+            {loading ?
+                <div>Loading...</div>
                 :
-                <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                    {Array.isArray(subjectsList) && subjectsList.length > 0 &&
-                        <TableTemplate buttonHaver={SubjectsButtonHaver} columns={subjectColumns} rows={subjectRows} />
+                <>
+                    {response ?
+                        <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px' }}>
+                            <GreenButton variant="contained"
+                                onClick={() => navigate("/Admin/subjects/chooseclass")}>
+                                Add Subjects
+                            </GreenButton>
+                        </Box>
+                        :
+                        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                            {Array.isArray(subjectsList) && subjectsList.length > 0 &&
+                                <TableTemplate buttonHaver={SubjectsButtonHaver} columns={subjectColumns} rows={subjectRows} />
+                            }
+                            <SpeedDialTemplate actions={actions} />
+                        </Paper>
                     }
-                    <SpeedDialTemplate actions={actions} />
-                </Paper>
+                </>
             }
-        </>
-    }
-    <Popup message={message} setShowPopup={setShowPopup} showPopup={showPopup} />
-</>
-  )
-}
+            <Popup message={message} setShowPopup={setShowPopup} showPopup={showPopup} />
 
-export default ShowSubject
+        </>
+    );
+};
+
+export default ShowSubjects;

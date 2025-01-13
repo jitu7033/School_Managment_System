@@ -9,7 +9,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { KeyboardArrowUp, KeyboardArrowDown, Delete as DeleteIcon } from '@mui/icons-material';
 import { removeStuff, updateStudentFields } from '../../../redux/studentRelated/studentHandle';
-import { calculateOverallAttendancePercentage, calculateSubjectAttendancePercentage, groupAttendanceBySubject } from '../../../components/attendenceCalculator';
+import { calculateOverallAttendancePercentage, calculateSubjectAttendancePercentage, groupAttendanceBySubject } from '../../../components/attendanceCalculator';
 import CustomBarChart from '../../../components/CustomBarChart'
 import CustomPieChart from '../../../components/CustomPieChart'
 import { StyledTableCell, StyledTableRow } from '../../../components/styles';
@@ -21,72 +21,66 @@ import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 import Popup from '../../../components/Popup';
 
 const ViewStudent = () => {
+    const [showTab, setShowTab] = useState(false);
 
-    const [showTab,setShowTab] = useState(false);
+    const navigate = useNavigate()
+    const params = useParams()
+    const dispatch = useDispatch()
+    const { userDetails, response, loading, error } = useSelector((state) => state.user);
 
-    const navigate = useNavigate();
-    const params = useParams();
-    const dispatch = useDispatch();
-    const {userDetails,response,loading,error} = useSelector((state)=>state.user);
+    const studentID = params.id
+    const address = "Student"
 
-    const studentID = params.id;
-    const address = "Student";
+    useEffect(() => {
+        dispatch(getUserDetails(studentID, address));
+    }, [dispatch, studentID])
 
-    useEffect(()=>{
-        dispatch(getUserDetails(studentID,address));
-    },[dispatch,studentID]);
-
-    useEffect(()=>{
-        if(userDetails && userDetails.sclassName && userDetails.sclassName._id !== undefined){
-            dispatch(getSubjectList(userDetails.sclassName._id,"ClassSubjects"))
+    useEffect(() => {
+        if (userDetails && userDetails.sclassName && userDetails.sclassName._id !== undefined) {
+            dispatch(getSubjectList(userDetails.sclassName._id, "ClassSubjects"));
         }
-    },[dispatch,userDetails]);
+    }, [dispatch, userDetails]);
 
-    if(response){console.log(response)}
-    else if(error){console.log(error)}
+    if (response) { console.log(response) }
+    else if (error) { console.log(error) }
 
-    const [name,setName] = useState('')
-    const [rollNum,setRollNum] = useState('')
-    const [password,setPassword] = useState('');
-    const [sclassName,setSclassName] = useState('')
+    const [name, setName] = useState('');
+    const [rollNum, setRollNum] = useState('');
+    const [password, setPassword] = useState('');
+    const [sclassName, setSclassName] = useState('');
     const [studentSchool, setStudentSchool] = useState('');
-    const [subjectMarks,setSubjectMarks] = useState('')
-    const [subjectAttendance,setSubjectAttendance] = useState([]);
+    const [subjectMarks, setSubjectMarks] = useState('');
+    const [subjectAttendance, setSubjectAttendance] = useState([]);
 
-    const [openStates,setopenState] = useState({});
+    const [openStates, setOpenStates] = useState({});
 
+    const [showPopup, setShowPopup] = useState(false);
+    const [message, setMessage] = useState("");
 
-    const [showPopup,setShowPopup] = useState(false);
-    const [message,setMessage] = useState("");
-
-    const handleOpen = (subId) =>{
-        setopenState((prevState)=>({
+    const handleOpen = (subId) => {
+        setOpenStates((prevState) => ({
             ...prevState,
-            [subId] : !prevState[subId],
+            [subId]: !prevState[subId],
         }));
-    }
+    };
 
     const [value, setValue] = useState('1');
-
-    const [selectedSection,setselectedSection] = useState('table');
-
-
-    const handleSectionChange = (event,newSection) => {
-        setselectedSection(newSection);
-    }
-
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
+    const [selectedSection, setSelectedSection] = useState('table');
+    const handleSectionChange = (event, newSection) => {
+        setSelectedSection(newSection);
+    };
 
     const fields = password === ""
-    ? {name,rollNum} 
-    : {name,rollNum,password}
+        ? { name, rollNum }
+        : { name, rollNum, password }
 
-    useEffect(()=>{
-        if(userDetails){
+    useEffect(() => {
+        if (userDetails) {
             setName(userDetails.name || '');
             setRollNum(userDetails.rollNum || '');
             setSclassName(userDetails.sclassName || '');
@@ -94,8 +88,7 @@ const ViewStudent = () => {
             setSubjectMarks(userDetails.examResult || '');
             setSubjectAttendance(userDetails.attendance || []);
         }
-    },[userDetails]);
-
+    }, [userDetails]);
 
     const submitHandler = (event) => {
         event.preventDefault()
@@ -105,7 +98,7 @@ const ViewStudent = () => {
             })
             .catch((error) => {
                 console.error(error)
-        })
+            })
     }
 
     const deleteHandler = () => {
@@ -125,7 +118,6 @@ const ViewStudent = () => {
             })
     }
 
-
     const removeSubAttendance = (subId) => {
         dispatch(updateStudentFields(studentID, { subId }, "RemoveStudentSubAtten"))
             .then(() => {
@@ -140,7 +132,7 @@ const ViewStudent = () => {
         { name: 'Present', value: overallAttendancePercentage },
         { name: 'Absent', value: overallAbsentPercentage }
     ];
-
+    
     const subjectData = Object.entries(groupAttendanceBySubject(subjectAttendance)).map(([subName, { subCode, present, sessions }]) => {
         const subjectAttendancePercentage = calculateSubjectAttendancePercentage(present, sessions);
         return {

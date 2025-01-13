@@ -14,83 +14,74 @@ import {
     TextField, CircularProgress, FormControl
 } from '@mui/material';
 
-
-const StudentExamMarks = (situation) => {
-
+const StudentExamMarks = ({ situation }) => {
     const dispatch = useDispatch();
-    const {currentUser, userDetails,loading} = useSelector((state)=>state.user);
-    const {subjectList} = useSelector((state)=>state.class);
-    const {response,error,statestatus} = useSelector((state)=>state.student);
-    const params = useParams();
-    
-    
-    const [studentID ,setStudentID] = useState("");
-    const [subjectName,setSubjectName] = useState("");
-    const [chosenSubName,setChosenSubName] = useState("");
-    const [marksObtained,setMarksObtained] = useState("");
+    const { currentUser, userDetails, loading } = useSelector((state) => state.user);
+    const { subjectsList } = useSelector((state) => state.sclass);
+    const { response, error, statestatus } = useSelector((state) => state.student);
+    const params = useParams()
 
-    const [showPopup,setShowPopup] = useState(false);
-    const [message,setMessage] = useState("");
-    const [loader,setLoader] = useState(false);
+    const [studentID, setStudentID] = useState("");
+    const [subjectName, setSubjectName] = useState("");
+    const [chosenSubName, setChosenSubName] = useState("");
+    const [marksObtained, setMarksObtained] = useState("");
 
-    useEffect(()=>{
-        if(situation === "Student"){
+    const [showPopup, setShowPopup] = useState(false);
+    const [message, setMessage] = useState("");
+    const [loader, setLoader] = useState(false)
+
+    useEffect(() => {
+        if (situation === "Student") {
             setStudentID(params.id);
-            const stdID = params.id;
-            dispatch(getUserDetails(stdID,"Student"));
+            const stdID = params.id
+            dispatch(getUserDetails(stdID, "Student"));
         }
-        else if(situation === "Subject"){
-            const [studentID,subjectID] = params;
+        else if (situation === "Subject") {
+            const { studentID, subjectID } = params
             setStudentID(studentID);
+            dispatch(getUserDetails(studentID, "Student"));
             setChosenSubName(subjectID);
         }
-    },[situation])
+    }, [situation]);
 
-
-    useEffect(()=>{
-        if(userDetails && userDetails.sclassName && situation === "Student"){
-            dispatch(getSubjectList(userDetails.sclassName._id,"ClassSubjects"))
+    useEffect(() => {
+        if (userDetails && userDetails.sclassName && situation === "Student") {
+            dispatch(getSubjectList(userDetails.sclassName._id, "ClassSubjects"));
         }
-    },[dispatch,userDetails]);
-
+    }, [dispatch, userDetails]);
 
     const changeHandler = (event) => {
-        const selectedSubject = subjectList.find(
+        const selectedSubject = subjectsList.find(
             (subject) => subject.subName === event.target.value
         );
         setSubjectName(selectedSubject.subName);
         setChosenSubName(selectedSubject._id);
     }
 
-    const fields = {subName : chosenSubName, marksObtained}
-
-    const submitHandler = (event) =>{
-        event.preventDefault();
-        setLoader(true);
-        dispatch(updateStudentFields(studentID,fields,"UpdateExamResult"))
+    const fields = { subName: chosenSubName, marksObtained }
+    const submitHandler = (event) => {
+        event.preventDefault()
+        setLoader(true)
+        dispatch(updateStudentFields(studentID, fields, "UpdateExamResult"))
     }
 
-    useEffect(()=>{
-        if(response){
-            setLoader(false);
-            setShowPopup(true);
-            setMessage(response);
-
+    useEffect(() => {
+        if (response) {
+            setLoader(false)
+            setShowPopup(true)
+            setMessage(response)
         }
-        else if(error){
-            setLoader(false);
-            showPopup(true);
-            setMessage("error");
+        else if (error) {
+            setLoader(false)
+            setShowPopup(true)
+            setMessage("error")
         }
-        else if(statestatus === "added"){
-            setLoader(false);
-            showPopup(true);
-            setMessage("Done Successfully");
+        else if (statestatus === "added") {
+            setLoader(false)
+            setShowPopup(true)
+            setMessage("Done Successfully")
         }
-    },[response,statestatus,error])
-
-
-    
+    }, [response, statestatus, error])
 
     return (
         <>
@@ -142,8 +133,8 @@ const StudentExamMarks = (situation) => {
                                                 label="Choose an option"
                                                 onChange={changeHandler} required
                                             >
-                                                {subjectList ?
-                                                    subjectList.map((subject, index) => (
+                                                {subjectsList ?
+                                                    subjectsList.map((subject, index) => (
                                                         <MenuItem key={index} value={subject.subName}>
                                                             {subject.subName}
                                                         </MenuItem>
@@ -183,7 +174,7 @@ const StudentExamMarks = (situation) => {
                 </>
             }
         </>
-    );
+    )
 }
 
 export default StudentExamMarks

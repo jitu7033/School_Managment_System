@@ -1,98 +1,47 @@
-import { Container , Grid , Paper} from '@mui/material';
-import SeeNotice from '../../components/SeeNotice';
-import CountUp from 'react-countup';
+import React from 'react'
 import styled from 'styled-components';
-import Students from "../../assets/img1.png";
-import Lessons from "../../assets/subjects.svg";
-import Test from "../../assets/assignment.svg";
-import Time from "../../assets/time.svg";
-import { getClassStudents , getSubjectDetails} from "../../redux/sclassRelated/sclassHandle";
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { Card, CardContent, Typography } from '@mui/material';
+import { useSelector } from 'react-redux';
 
-const TeacherHomePage = ()=> {
-    const dispatch =  useDispatch();
-    const { currentUser } = useSelector((state) => state.user);
-    const { subjectDetail, sclassStudents } = useSelector((state) => state.sclass);
+const TeacherProfile = () => {
+  const { currentUser, response, error } = useSelector((state) => state.user);
 
-    const classID = currentUser.teachSclass?._id;
-    const subjectID = currentUser.teachSubject?._id;
+  if (response) { console.log(response) }
+  else if (error) { console.log(error) }
 
-    useEffect(()=>{
-        dispatch(getSubjectDetails(subjectID, "Subject"));
-        dispatch(getClassStudents(classID));
-    } , [dispatch , subjectID , classID]);
+  const teachSclass = currentUser.teachSclass
+  const teachSubject = currentUser.teachSubject
+  const teachSchool = currentUser.school
 
-    const numberOfStudents = sclassStudents && sclassStudents.length;
-    const numberOfSessions = subjectDetail && subjectDetail.sessions;
+  return (
+    <>
+      <ProfileCard>
+        <ProfileCardContent>
+          <ProfileText>Name: {currentUser.name}</ProfileText>
+          <ProfileText>Email: {currentUser.email}</ProfileText>
+          <ProfileText>Class: {teachSclass.sclassName}</ProfileText>
+          <ProfileText>Subject: {teachSubject.subName}</ProfileText>
+          <ProfileText>School: {teachSchool.schoolName}</ProfileText>
+        </ProfileCardContent>
+      </ProfileCard>
+    </>
+  )
+}
 
-    return (
-        <>
-            <Container maxWidth="lg" sx={{ mt:4 , mb: 4 }}>
-                <Grid item xs={12} md={3} lg={3}>
-                    <StyledPaper>
-                        <img src={Students} alt="Students" />
-                        <Title>
-                            Class Students
-                        </Title>
-                        <Data start={0} end={numberOfStudents} duration={2.5} />
-                    </StyledPaper>
-                </Grid>
-                <Grid item xs={12} md={3} lg={3}>
-                    <StyledPaper>
-                        <img src={Lessons} alt="Lessons" />
-                        <Title>
-                            Total Lessons
-                        </Title>
-                        <Data start={0} end={numberOfSessions} duration={5} />
-                    </StyledPaper>
-                </Grid>
-                <Grid item xs={12} md={3} lg={3}>
-                    <StyledPaper>
-                        <img src={Test} alt="Tests" />
-                        <Title>
-                            Tests Taken
-                        </Title>
-                        <Data start={0} end={24} duration={4} />
-                    </StyledPaper>
-                </Grid>
-                <Grid item xs={12} md={3} lg={3}>
-                    <StyledPaper>
-                        <img src={Time} alt="Time" />
-                        <Title>
-                            Total Hours
-                        </Title>
-                        <Data start={0} end={30} duration={4} suffix="hrs"/>
-                    </StyledPaper>
-                </Grid>
-                <Grid item xs={12}>
-                    <Paper sx={{ p:2 , display:'flex' , flexDirection : 'column'}}>
-                        <SeeNotice />
-                    </Paper>
-                </Grid>
-            </Container>
-        </>
-    );
-};
+export default TeacherProfile
 
-
-const StyledPaper = styled(Paper)`
-    padding : 16px;
-    display : flex;
-    flex-idrection : column;
-    height : 200px;
-    justify-content : space-between;
-    align-items : center;
-    text-align : center;
+const ProfileCard = styled(Card)`
+  margin: 20px;
+  width: 400px;
+  border-radius: 10px;
 `;
 
-const Title = styled.p`
-    font-size : calc(1.3rem + 0.6vw);
+const ProfileCardContent = styled(CardContent)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
-const Data = styled(CountUp)`
-    font-size : calc(1.3rem + 0.6vw);
-    color : green;
+const ProfileText = styled(Typography)`
+  margin: 10px;
 `;
-
-export default TeacherHomePage;
